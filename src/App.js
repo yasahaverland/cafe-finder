@@ -13,10 +13,37 @@ import Results from './components/routes/Results'
 import Navbar from './components/Navbar'
 import './App.css'
 import jwt_decode from 'jwt-decode'
+import axios from 'axios'
 
 function App() {
   // the currently logged in user will be stored up here in state
-  const [currentUser, setCurrentUser] = useState(null)
+  const [ currentUser, setCurrentUser] = useState(null)
+
+  // api responses
+  const [ apiResponse, setApiResponse ] = useState([])
+
+  // controlled input of cofes search
+  const [ inputValue, setInputValue ] = useState('')
+
+  // what to search on the api
+  const [ search, setSearch ] = useState('cafe')
+
+  // saved cafes
+  const [ save, setSave ] = useState([])
+
+  // fetching api data
+  useEffect(() => {
+    const getCoffee = async () => {
+      try {
+        const url = "https://api.yelp.com/v3/businesses/restaurants"
+        const response = await axios.get(url)
+        console.log(response.data)
+      } catch(err){
+        console.warn(err)
+      }
+    }
+    getCoffee()
+  }, [])
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
