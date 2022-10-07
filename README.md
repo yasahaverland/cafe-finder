@@ -21,7 +21,8 @@ We plan on using the Yelp API to find coffee shops through the API.
 
 ## ERD's
 
-![image](https://user-images.githubusercontent.com/110140349/194474066-cb2d9ba1-bef8-40fc-8248-71b91a839607.png)
+![image](https://user-images.githubusercontent.com/110140349/194650996-5cb39019-ced6-4a04-a8a7-d4236244e1a0.png)
+
 
 ## Restful Routing Chart
 
