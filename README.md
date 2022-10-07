@@ -34,6 +34,9 @@ We plan on using the Yelp API to find coffee shops through the API.
 
 ![image](https://user-images.githubusercontent.com/110140349/194475079-def58914-6e35-4391-85b4-05551eaa3b59.png)
 
+![image](https://user-images.githubusercontent.com/110140349/194477407-23cfa126-06e7-4603-81af-7a07a8f8ef6e.png)
+
+
 ![image](https://user-images.githubusercontent.com/110140349/194476196-622ff715-5fa8-4490-b855-ca6220128991.png)
 
 
