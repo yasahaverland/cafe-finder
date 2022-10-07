@@ -65,4 +65,5 @@ Wednesday - Everybody work on CSS on their own respective pages
 
 ## Stretch Goals
 - Adding a map feature and using MapBox API
+- Have other users see how many times a cafe has been saved/favorited
 - CSS
