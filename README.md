@@ -59,3 +59,7 @@ Wednesday - Everybody work on CSS on their own respective pages
 - Leave favorite drink comments on cafes
 - Have user authenticate and login
 - Have user be able to logout
+
+## Stretch Goals
+- Adding a map feature and using MapBox API
+- CSS
