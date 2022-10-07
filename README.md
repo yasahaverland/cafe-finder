@@ -28,3 +28,34 @@ We plan on using the Yelp API to find coffee shops through the API.
 ![image](https://user-images.githubusercontent.com/110140349/194474107-150ce9ca-ce94-4d45-a0dc-09c9d1d263de.png)
 
 ![image](https://user-images.githubusercontent.com/110140349/194474138-1760b190-1e70-42c7-abdd-6e100e1e2aa0.png)
+
+
+## Wireframe
+
+![image](https://user-images.githubusercontent.com/110140349/194475079-def58914-6e35-4391-85b4-05551eaa3b59.png)
+
+![image](https://user-images.githubusercontent.com/110140349/194476196-622ff715-5fa8-4490-b855-ca6220128991.png)
+
+
+## Plan Breakdown
+
+Friday - Making sure that user authentication works. Make sure API works.
+  Aimee is a driver – everyone works on the project together to set up everything.
+Sunday - Make sure all of the routes are working, make sure layout of pages look nice
+  Aimee - work on navbar
+  Brandon - works on Profile.js
+  Tim - works on Results.js
+  Yasmin - works on NewUser.js
+Monday - Make sure forms are working, users are able to favorite, and add drinks to database
+  Aimee and Yasmin - works on adding favorites
+  Brandon and Tim - works on creating drinks form
+Tuesday - Extra day to stub out routes and forms. Start on CSS
+Wednesday - Everybody work on CSS on their own respective pages
+
+## MVP
+
+- Be able to search up cafe shops based on location and/or business name
+- Mark cafe shops as visited or not
+- Leave favorite drink comments on cafes
+- Have user authenticate and login
+- Have user be able to logout
