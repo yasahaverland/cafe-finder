@@ -5,7 +5,7 @@ export default function Navbar({ currentUser, handleLogout }) {
 		<>
 		<div className='nav-bar'>
 			{/* if the user is logged in... */}
-			<Link className='links' to="/cafes/results">Search</Link>
+			<Link className='links' to="/results">Search</Link>
 			
 			<Link className='links' to="/profile">
 				Profile
