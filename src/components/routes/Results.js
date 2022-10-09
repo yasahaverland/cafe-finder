@@ -1,7 +1,15 @@
+import React from 'react'
+import { Result } from '../routes/Result'
+
 export default function Results() {
+
+
 	return (
 		<div>
-			Search results
+			<Result 
+			/>
 		</div>
 	)
 }
+
+
