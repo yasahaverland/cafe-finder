@@ -58,19 +58,19 @@ function App(term, location) {
   // // saved cafes
   // const [ save, setSave ] = useState([])
 
-//   // fetching api data
-//   useEffect(() => {
-//     const getCoffee = async () => {
-//       try {
-//         const url = "https://api.yelp.com/v3/businesses/north-india-restaurant-san-francisco"
-//         const response = await axios.get(url)
-//         console.log(response.data)
-//       } catch(err){
-//         console.warn(err)
-//       }
-//     }
-//     getCoffee()
-//   }, [])
+  // fetching api data
+  // useEffect(() => {
+  //   const getCoffee = async () => {
+  //     try {
+  //       const url = "https://api.yelp.com/v3/businesses/north-india-restaurant-san-francisco"
+  //       const response = await axios.get(url)
+  //       console.log(response.data)
+  //     } catch(err){
+  //       console.warn(err)
+  //     }
+  //   }
+  //   getCoffee()
+  // }, [])
 
 
 

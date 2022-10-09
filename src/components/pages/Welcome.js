@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+import { useBusinessSearch } from '../hooks/yelp-api/useBusinessSearch'
 
 export default function Welcome(props) {
     const [term, setTerm] = useState(props.term || '')
     const [location, setLocation] = useState(props.location || '')
+
+	const [businesses, amountResults, searchParams, setSearchParams] = useBusinessSearch(term, location)
     
     function submit(e) {
         // if(typeof props.search === 'function') {
