@@ -10,13 +10,13 @@ export default function Welcome(props) {
         const getResults = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${search}`)
-                setResults(response.data.businesses)
-                console.log('CONSOLELOG',response.data.businesses)
+                setResults(response.data.businesses) 
             } catch(err) {
                 console.warn(err)
             }
         }
         getResults()
+        
     }, [])
 
     const handleSubmit = async(e) => {
