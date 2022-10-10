@@ -1,39 +1,52 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 export default function Welcome(props) {
-    const [term, setTerm] = useState(props.term || '')
-    const [location, setLocation] = useState(props.location || '')
+    const [search, setSearch] = useState({
+        location:''
+    })
+
+    // useEffect(() => {
+    //     const getResults = async () => {
+    //         try {
+    //             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}&${search}`)
+    //             console.log(response)
+    //         } catch(err) {
+    //             console.warn(err)
+    //         }
+    //     }
+    //     getResults()
+    // })
     
-    function submit(e) {
-        // if(typeof props.search === 'function') {
-        //     props.search(term, location)
-        // }
-        console.log(term, location)
-        e.preventDefault()
+    const handleSubmit = async(e) => {
+        try {
+            e.preventDefault()
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${search}`)
+            console.log('CONSOLELOG',response.data)
+            
+        } catch(err){
+            console.log(err)
+        }
+        
+       
     }
 
 	return (
 		<div>
 			<h1>Welcome start searching for a cafe:</h1>
 
-            <form onSubmit={submit}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <p>
                         <input 
                             type ='text' 
-                            placeholder='Search for a cafe, coffee, drink ....' 
-                            onChange={(e) => setTerm(e.target.value)}
-                        />
-                    </p>
-                    <p>
-                        <input 
-                            type ='text' 
                             placeholder='enter a location' 
-                            onChange={(e) => setLocation(e.target.value)}
+                            value={search.location}
+                            onChange={(e) => setSearch(e.target.value)}
                         />
                     </p>
                     <p>
-                        <button onClick={submit}>Search</button>
+                        <button type="submit" >Search</button>
                     </p>
                 </div>
             </form>
