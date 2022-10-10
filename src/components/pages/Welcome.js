@@ -25,6 +25,7 @@ export default function Welcome(props) {
         try {
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${search}`)
             console.log('CONSOLELOG',response.data)
+            setResults(response.data.businesses)
         } catch(err){
             console.log(err)
         }
