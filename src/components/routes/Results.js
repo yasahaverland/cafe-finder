@@ -2,7 +2,6 @@ import React from 'react'
 import { Result } from '../routes/Result'
 
 export default function Results(props) {
-	console.log(props.results)
 	const cafe = props.results.map(result => {
 		return (
 			<div>
