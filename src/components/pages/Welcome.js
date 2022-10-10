@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Results from '../routes/Results'
+
 export default function Welcome(props) {
     const [search, setSearch] = useState('92886')
+    const [results, setResults] = useState([])
+
     useEffect(() => {
         const getResults = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${search}`)
-                console.log('CONSOLELOG',response.data)
+                setResults(response.data.businesses)
+                console.log('CONSOLELOG',response.data.businesses)
             } catch(err) {
                 console.warn(err)
             }
         }
         getResults()
     }, [])
+
     const handleSubmit = async(e) => {
          e.preventDefault()
         try {
@@ -40,6 +46,9 @@ export default function Welcome(props) {
                     </p>
                 </div>
             </form>
+            <Results 
+                results={results}
+            />
         </div>
     )
 }
