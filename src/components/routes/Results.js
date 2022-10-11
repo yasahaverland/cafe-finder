@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 export default function Results(props) {
 	// console.log(props.results)
+
 	const cafe = props.results.map(result => {
 		return (
 			<div className='big-div'>
