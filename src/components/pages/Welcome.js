@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Results from '../routes/Results'
 import Result from '../routes/Result'
+import { Navigate } from 'react-router-dom'
 // import { Link } from 'react-router-dom'
 
 export default function Welcome(props) {
-    const [search, setSearch] = useState('92886')
-    const [results, setResults] = useState([])
+    // const [search, setSearch] = useState('92886')
+    // const [results, setResults] = useState([])
+    const { location } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getResults = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/results/${search}`)
-                setResults(response.data.businesses) 
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/results/${props.search}`)
+                props.setResults(response.data.businesses) 
             } catch(err) {
                 console.warn(err)
             }
@@ -24,11 +28,11 @@ export default function Welcome(props) {
     const handleSubmit = async(e) => {
          e.preventDefault()
         try {
-            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/results/${search}`)
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/results/${props.search}`)
             // console.log('CONSOLELOG',response.data)
-            setResults(response.data.businesses) 
-            console.log('CONSOLELOG',response.data)
-            setResults(response.data.businesses)
+            props.setResults(response.data.businesses)
+            // location = props.search
+            navigate(`/results/${props.search}`)
         } catch(err){
             console.log(err)
         }
@@ -52,8 +56,8 @@ export default function Welcome(props) {
                         <input
                             type ='text'
                             placeholder='enter a location'
-                            value={search.location}
-                            onChange={(e) => setSearch(e.target.value)}
+                            value={props.search.location}
+                            onChange={(e) => props.setSearch(e.target.value)}
                         />
                     </p>
                     <p>
@@ -63,11 +67,11 @@ export default function Welcome(props) {
                 </div>
             </form>
             <Results 
-                results={results}
+                results={props.results}
             />
-            <Result 
+            {/* <Result 
                 results={results}
-            />
+            /> */}
         </div>
     )
 }
