@@ -30,18 +30,18 @@ function App(term, location) {
   // const [amountResults, setAmountResults] = useState()
   // const [searchParams, setSearchParams] = useState({term, location})
 
-  // useEffect(() => {
+// useEffect(() => {
   //   setBusinesses([]);
   //   const fetchData = async () => {
-  //     try {
+//     try {
   //       const rawData = await api.get('/businesses/search', searchParams)
   //       const resp = await rawData.json()
   //       setBusinesses(resp.businesses)
   //       setAmountResults(resp.total)
-  //     } catch (err) {
+//     } catch (err) {
   //       console.log(err)
-  //     }
-  //   }
+//     }
+//   }
   //   fetchData()
   // }, [searchParams])
 
