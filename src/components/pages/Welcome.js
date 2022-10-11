@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Results from '../routes/Results'
+import Result from '../routes/Result'
 // import { Link } from 'react-router-dom'
 
 export default function Welcome(props) {
     const [search, setSearch] = useState('92886')
     const [results, setResults] = useState([])
+
     useEffect(() => {
         const getResults = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/results/${search}`)
-                
                 setResults(response.data.businesses) 
             } catch(err) {
                 console.warn(err)
@@ -19,12 +20,13 @@ export default function Welcome(props) {
         getResults()
         
     }, [])
-    
 
     const handleSubmit = async(e) => {
          e.preventDefault()
         try {
             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/results/${search}`)
+            // console.log('CONSOLELOG',response.data)
+            setResults(response.data.businesses) 
             console.log('CONSOLELOG',response.data)
             setResults(response.data.businesses)
         } catch(err){
@@ -61,6 +63,9 @@ export default function Welcome(props) {
                 </div>
             </form>
             <Results 
+                results={results}
+            />
+            <Result 
                 results={results}
             />
         </div>
