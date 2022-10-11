@@ -15,6 +15,7 @@ import Navbar from './components/Navbar'
 import './App.css'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios' 
+import Search from './components/routes/Search'
 
 // export function App (term, location)
 
@@ -139,9 +140,9 @@ const [cafeInfo, setCafeInfo] = useState({})
           {/* <Route path="/results/:yelpId"
                 element={<Result/>}
           /> */}
-
+          <Route path='/search' element={<Search/>} />
           {/* Addition for a results route */}
-          <Route path='/results/:location' element={<Results results={results} setResults={setResults} search={search} setSearch={setSearch}/>} />
+          <Route path='/search/results/:location' element={<Results results={results} setResults={setResults} search={search} setSearch={setSearch}/>} />
 
           <Route path='/cafes/:yelpId' element={<Result results={results} setResults={setResults} search={search} setSearch={setSearch} cafeInfo={cafeInfo} setCafeInfo={setCafeInfo} />} />
           
