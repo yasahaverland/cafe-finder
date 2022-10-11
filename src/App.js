@@ -9,6 +9,7 @@ import Login from './components/pages/Login'
 import Profile from './components/pages/Profile'
 import Register from './components/pages/Register'
 import Welcome from './components/pages/Welcome'
+import Result from './components/routes/Result'
 import Results from './components/routes/Results'
 import Navbar from './components/Navbar'
 import './App.css'
@@ -72,7 +73,9 @@ function App(term, location) {
 //     getCoffee()
 //   }, [])
 
-
+const [search, setSearch] = useState('92886')
+const [results, setResults] = useState([])
+const [cafeInfo, setCafeInfo] = useState({})
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
@@ -110,7 +113,7 @@ function App(term, location) {
         <Routes>
           <Route 
             path="/"
-            element={<Welcome />}
+            element={<Welcome results={results} setResults={setResults} search={search} setSearch={setSearch}/>}
           />
 
           <Route 
@@ -129,9 +132,23 @@ function App(term, location) {
             element={currentUser ? <Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <Navigate to="/login" />}
           />
 
-          <Route path="/results" element={<Results/>}>
+          {/* <Route path="/results"
+                          element={<Results/>}
+                    /> */}
+
+          {/* <Route path="/results/:yelpId"
+                element={<Result/>}
+          /> */}
+
+          {/* Addition for a results route */}
+          <Route path='/results/:location' element={<Results results={results} setResults={setResults} search={search} setSearch={setSearch}/>} />
+
+          <Route path='/cafes/:yelpId' element={<Result results={results} setResults={setResults} search={search} setSearch={setSearch} cafeInfo={cafeInfo} setCafeInfo={setCafeInfo} />} />
+          
             {/* <p>[businesses, amountResults, searchParams, setSearchParams]</p> */}
-          </Route>
+      
+
+          {/* <Route path="/"></Route> */}
 
         </Routes>
       </div>
