@@ -9,7 +9,7 @@ export default function Welcome(props) {
     useEffect(() => {
         const getResults = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${search}`)
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/results/${search}`)
                 setResults(response.data.businesses) 
             } catch(err) {
                 console.warn(err)
@@ -22,8 +22,9 @@ export default function Welcome(props) {
     const handleSubmit = async(e) => {
          e.preventDefault()
         try {
-            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${search}`)
-            console.log('CONSOLELOG',response.data)
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/results/${search}`)
+            // console.log('CONSOLELOG',response.data)
+            setResults(response.data.businesses) 
         } catch(err){
             console.log(err)
         }
