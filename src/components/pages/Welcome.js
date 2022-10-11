@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Results from '../routes/Results'
+import Result from '../routes/Result'
 // import { Link } from 'react-router-dom'
 
 export default function Welcome(props) {
@@ -62,6 +63,9 @@ export default function Welcome(props) {
                 </div>
             </form>
             <Results 
+                results={results}
+            />
+            <Result 
                 results={results}
             />
         </div>
