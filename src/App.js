@@ -73,7 +73,9 @@ function App(term, location) {
 //     getCoffee()
 //   }, [])
 
-
+const [search, setSearch] = useState('92886')
+const [results, setResults] = useState([])
+const [cafeInfo, setCafeInfo] = useState({})
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
@@ -111,7 +113,7 @@ function App(term, location) {
         <Routes>
           <Route 
             path="/"
-            element={<Welcome />}
+            element={<Welcome results={results} setResults={setResults} search={search} setSearch={setSearch}/>}
           />
 
           <Route 
@@ -134,9 +136,14 @@ function App(term, location) {
                           element={<Results/>}
                     /> */}
 
-          <Route path="/result"
+          {/* <Route path="/results/:yelpId"
                 element={<Result/>}
-          />
+          /> */}
+
+          {/* Addition for a results route */}
+          <Route path='/results/:location' element={<Results results={results} setResults={setResults} search={search} setSearch={setSearch}/>} />
+
+          <Route path='/cafes/:yelpId' element={<Result results={results} setResults={setResults} search={search} setSearch={setSearch} cafeInfo={cafeInfo} setCafeInfo={setCafeInfo} />} />
           
             {/* <p>[businesses, amountResults, searchParams, setSearchParams]</p> */}
       
