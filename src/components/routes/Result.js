@@ -7,15 +7,7 @@ import Profile from '../pages/Profile'
 export default function Result(props) {
 	const { yelpId } = useParams()
 	const [comments, setComments] = useState([])
-	const [form, setForm] = useState({
-					yelpId: '',
-                    name: '',
-                    location: '',
-                    website_link: '',
-                    phone_number: '',
-                    price: ''
-				})
-	const navigate = useNavigate()
+	const [saveButton, setSaveButton] = useState("Save Cafe")
 
 	useEffect(() => {
 		const getResult = async () => {
@@ -28,7 +20,9 @@ export default function Result(props) {
 			}
 		}
 		getResult()
-		
+
+
+
 	}, [])
 	console.log('TEST', props.cafeInfo)
 	const cafeSingle = props.cafeInfo
@@ -41,6 +35,33 @@ export default function Result(props) {
 			// /${props.currentUser.id}
 			navigate('/profile')
 		} catch(err) {
+			console.warn(err)
+		}
+	}
+
+
+	const getSaveConditional = async (e) => {
+		try {
+			e.preventDefault()
+			const theCafe = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}`)
+			const theUser = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/users/${props.currentUser.email}`)
+			
+			const cafeArr = theCafe.data.user.map(userId => {
+				return (
+					userId._id
+				)
+			})
+
+			console.log(cafeArr)
+			console.log(props.currentUser.id)
+			if(cafeArr.includes(props.currentUser.id)) { // checks if the cafe has the current user inside of it
+				setSaveButton("Unsave Cafe")
+				console.log(saveButton)
+			} else {
+				setSaveButton("Save Cafe")
+				console.log(saveButton)
+			}
+		} catch (err) {
 			console.warn(err)
 		}
 	}
@@ -60,7 +81,7 @@ export default function Result(props) {
 	// 		</div>
 	// 	)
 	// }) 
-	
+
 	let commentList = comments.map(aComment => {
 		return (
 			<div>
@@ -70,7 +91,7 @@ export default function Result(props) {
 			</div>
 		)
 	})
-	
+
 	return (
 		<div className='big-div'>
 			<h2 class-name='item1'>{props.cafeInfo.name}</h2>
@@ -88,11 +109,12 @@ export default function Result(props) {
 			</ul>
 			<button>Save</button>
 
-			<form onSubmit={handleSubmit} >
-				{/* type='hidden' */}
-				<input  type='text' name='yelpId' value={cafeSingle.yelpId} onChange={e => setForm({...form, yelpId: e.target.value})}/>
-				<button type='submit'>save</button>
-			</form>
+			<form onSubmit={getSaveConditional} >
+                {/* type='hidden' */}
+                {/* <input  type='text' name='yelpId' value={cafeSingle.yelpId} onChange={e => setForm({...form, yelpId: e.target.value})}/> */}
+                <button type='submit'>{saveButton}</button>
+            </form>
+
 		</div>
 
 	)
