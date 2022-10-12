@@ -132,7 +132,7 @@ const [cafeInfo, setCafeInfo] = useState({})
           {/* conditionally render auth locked routes */}
           <Route 
             path="/profile"
-            element={currentUser ? <Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <Navigate to="/login" />}
+            element={currentUser ? <Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} cafeInfo={cafeInfo} setCafeInfo={setCafeInfo}  /> : <Navigate to="/login" />}
           />
 
           {/* <Route path="/results"
