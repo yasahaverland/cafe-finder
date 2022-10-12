@@ -76,7 +76,7 @@ function App(term, location) {
 
 const [search, setSearch] = useState('92886')
 const [results, setResults] = useState([])
-const [cafeInfo, setCafeInfo] = useState({})
+const [cafeInfo, setCafeInfo] = useState({ comment: []})
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
