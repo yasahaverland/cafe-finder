@@ -1,45 +1,30 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { Link,useParams } from 'react-router-dom'
 
 
 export default function Profile(props) {
 	// state for the secret message (aka user privilaged data)
 	const [msg, setMsg] = useState('')
 
-	const [save, setSave] = useState ([])
-
 	const [errorMessage, setErrorMessage] = useState('')
 
 	const { yelpId } = useParams()
 
-	console.log('USER', props.currentUser)
+	const cafeSaves = props.currentUser.cafe
 
-	useEffect(() => {
-		const getSaves = async () => {
-			try {
-				const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}`)
-				setSave(response.data)
-				console.log('RESPONSE DATA', response.data)
-			} catch(err) {
-				console.warn(err)
-				if (err.response) {
-					setErrorMessage(err.response.message)
-				}
-			}
-		}
-		getSaves()
-	}, [])
-	
-	console.log('SAVE',save)
+	console.log('USERS SAVED CAFES', cafeSaves)
 
-	// const cafeLinks = caves.map(cafe => {
-	// 	<div key={cafe._id}>
-	// 		<Link to={`/cafes/${result.id}`}>{cafe.name}</Link>
-	// 	</div>
-	// })
+	// map the cafeSaves arr
+	const displaySaves = cafeSaves.map((save, i) => {
+		return(
+			<li key={`save${i}`}>
+				<Link to={`/cafes/${save.yelpId}`}><h2 class-name='item1'>{save.name}</h2></Link> 
+			</li>
+			
+		)
+	})
 
-	// useEffect for getting the user data and checking auth
 	useEffect(() => {
 	const fetchData = async () => {
 			try {
@@ -78,6 +63,8 @@ export default function Profile(props) {
 
 			<h2>Here are your saved cafes:</h2>
 			{/* <p>{props.currentUser.cafe}</p> */}
+
+			<h3>{displaySaves}</h3>
 
 			<h3>{msg}</h3>
 		</div>

@@ -49,7 +49,7 @@ export default function Result(props) {
 			const theCafe = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}`)
 			console.log(theCafe.data)
 
-			const cafeArr = theCafe.data.user.map(userId => {
+			const cafeArr = theCafe.data.foundCafe.user.map(userId => {
 				return (
 					userId._id
 				)
@@ -133,7 +133,6 @@ export default function Result(props) {
 				<p>{aComment.content}</p>
 				<p>{aComment.drink_name}</p>
 				<p>{aComment.drink_score}</p>
-				<button onClick={deleteComment} >Delete Comment</button>
 			</div>
 		)
 	})
