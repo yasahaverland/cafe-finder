@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Navigate, useNavigate ,useParams } from 'react-router-dom'
 import Profile from '../pages/Profile'
+import jwt_decode from 'jwt-decode'
 
 export default function Result(props) {
 	const { yelpId } = useParams()
@@ -24,17 +25,7 @@ export default function Result(props) {
 
 
 	}, [])
-
-	const handleSubmit = async e => {
-		try{
-			e.preventDefault()
-			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}`)
-		} catch(err) {
-			console.warn(err)
-		}
-	}
-
-
+// decode token here with the save cafe variable
 	const getSaveConditional = async (e) => {
 		try {
 			e.preventDefault()
@@ -46,7 +37,17 @@ export default function Result(props) {
 					userId._id
 				)
 			})
-
+			
+			// save the token in localstorage
+			const { token } = theCafe.data
+			localStorage.setItem('jwt', token)
+			
+			// decode the token
+			const decoded = jwt_decode(token)
+			
+			// set the user in App's state to be the decoded token
+			props.setCurrentUser(decoded)
+			
 			console.log(cafeArr)
 			if(cafeArr.includes(props.currentUser.id)) { // checks if the cafe has the current user inside of it
 				setSaveButton("Unsave Cafe")
@@ -55,6 +56,7 @@ export default function Result(props) {
 				setSaveButton("Save Cafe")
 				console.log(saveButton)
 			}
+
 		} catch (err) {
 			console.warn(err)
 		}
@@ -91,7 +93,7 @@ export default function Result(props) {
 			<ul>
 				{commentList}
 			</ul>
-
+		
 		</div>
 
 	)
