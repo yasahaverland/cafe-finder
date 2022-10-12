@@ -1,13 +1,18 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Navigate, useNavigate ,useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import Profile from '../pages/Profile'
 
 export default function Result(props) {
 	const { yelpId } = useParams()
 	const [comments, setComments] = useState([])
+	const [content, setContent] = useState("")
+	const [drinkName, setDrinkName] = useState("")
+	const [drinkScore, setDrinkScore] = useState("")
 	const [saveButton, setSaveButton] = useState("Save Button Operator")
+
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		const getResult = async () => {
@@ -23,13 +28,14 @@ export default function Result(props) {
 
 
 
+
 	}, [])
 
 	const handleSubmit = async e => {
-		try{
+		try {
 			e.preventDefault()
 			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}`)
-		} catch(err) {
+		} catch (err) {
 			console.warn(err)
 		}
 	}
@@ -40,7 +46,7 @@ export default function Result(props) {
 			e.preventDefault()
 			const theCafe = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}`)
 			console.log(theCafe.data)
-			
+
 			const cafeArr = theCafe.data.user.map(userId => {
 				return (
 					userId._id
@@ -48,7 +54,7 @@ export default function Result(props) {
 			})
 
 			console.log(cafeArr)
-			if(cafeArr.includes(props.currentUser.id)) { // checks if the cafe has the current user inside of it
+			if (cafeArr.includes(props.currentUser.id)) { // checks if the cafe has the current user inside of it
 				setSaveButton("Unsave Cafe")
 				console.log(saveButton)
 			} else {
@@ -60,17 +66,37 @@ export default function Result(props) {
 		}
 	}
 
+	const createComment = async e => {
+		try {
+			e.preventDefault()
+			const addComment = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}/comments`,
+				{
+					content: content,
+					drink_name: drinkName,
+					drink_score: drinkScore
+				}
+			)
+			props.setCafeInfo(addComment.data)
+			navigate(`/cafes/${yelpId}`)
 
+		} catch (err) {
+			console.warn(err)
+		}
+	}
 
-	let commentList = comments.map(aComment => {
-		return (
-			<div>
-				<p>{aComment.content}</p>
-				<p>{aComment.drink_name}</p>
-				<p>{aComment.drink_score}</p>
-			</div>
-		)
-	})
+	// console.log(props.cafeInfo)
+
+	// const commentList = props.cafeInfo.comment.map(aComment => {
+	// 	return (
+	// 		<div>
+	// 			<h2>{aComment.populate('user')}</h2>
+	// 			<p>{aComment.content}</p>
+	// 			<p>{aComment.drink_name}</p>
+	// 			<p>{aComment.drink_score}</p>
+	// 		</div>
+	// 	)
+	// })
+
 
 	return (
 		<div className='big-div'>
@@ -85,13 +111,44 @@ export default function Result(props) {
 			<p className='item5'>{props.cafeInfo.phone_number}</p>
 
 			<form onSubmit={getSaveConditional} >
-                <button type='submit'>{saveButton}</button>
-            </form>
+				<button type='submit'>{saveButton}</button>
+			</form>
+
+
 
 			<ul>
-				{commentList}
+				{/* {commentList} */}
 			</ul>
 
+			<div>
+
+
+				<form onSubmit={createComment} >
+
+					<label htmlFor="comment">Review:</label>
+					<textarea
+						id="content"
+						name='content'
+						onChange={e => { setContent(e.target.value) }}
+						value={content}
+					></textarea>
+					<label htmlFor="comment">Drink Name:</label>
+					<input
+						type='text'
+						id='drink_name'
+						onChange={e => { setDrinkName(e.target.value) }}
+						value={drinkName}
+					/>
+					<label htmlFor="comment">Drink Score:</label>
+					<input
+						type='text'
+						id='drink_score'
+						onChange={e => { setDrinkScore(e.target.value) }}
+						value={drinkScore}
+					/>
+					<button type='submit'>Submit Comment</button>
+				</form>
+			</div>
 		</div>
 
 	)
