@@ -42,7 +42,7 @@ export default function Result(props) {
 	}
 
 
-// decode token here with the save cafe variable
+	// decode token here with the save cafe variable
 	const getSaveConditional = async (e) => {
 		try {
 			e.preventDefault()
@@ -61,13 +61,12 @@ export default function Result(props) {
 			const { token } = theCafe.data
 			localStorage.setItem('jwt', token)
 			
-			
 			// decode the token
 			const decoded = jwt_decode(token)
-			
+
 			// set the user in App's state to be the decoded token
 			props.setCurrentUser(decoded)
-			
+
 			console.log(cafeArr)
 			if (cafeArr.includes(props.currentUser.id)) { // checks if the cafe has the current user inside of it
 				setSaveButton("Unsave Cafe")
@@ -92,9 +91,36 @@ export default function Result(props) {
 					drink_score: drinkScore
 				}
 			)
+			// save the token in localstorage
+			const { token } = addComment.data
+			localStorage.setItem('jwt', token)
+
+			// decode the token
+			const decoded = jwt_decode(token)
+
+			// set the user in App's state to be the decoded token
+			props.setCurrentUser(decoded)
 			props.setCafeInfo(addComment.data)
 			navigate(`/cafes/${yelpId}`)
+		} catch (err) {
+			console.warn(err)
+		}
+	}
 
+	const deleteComment = async () => {
+		try {
+			const deleteComment = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}/comments`)
+			// save the token in localstorage
+			const { token } = deleteComment.data
+			localStorage.setItem('jwt', token)
+
+			// decode the token
+			const decoded = jwt_decode(token)
+
+			// set the user in App's state to be the decoded token
+			props.setCurrentUser(decoded)
+			props.setCafeInfo(deleteComment.data)
+			navigate(`/cafes/${yelpId}`)
 		} catch (err) {
 			console.warn(err)
 		}
@@ -102,16 +128,16 @@ export default function Result(props) {
 
 	// console.log(props.cafeInfo)
 
-	// const commentList = props.cafeInfo.comment.map(aComment => {
-	// 	return (
-	// 		<div>
-	// 			<h2>{aComment.populate('user')}</h2>
-	// 			<p>{aComment.content}</p>
-	// 			<p>{aComment.drink_name}</p>
-	// 			<p>{aComment.drink_score}</p>
-	// 		</div>
-	// 	)
-	// })
+	const commentList = props.cafeInfo.comment.map(aComment => {
+		return (
+			<div>
+				{/* <h2>{aComment.populate('user')}</h2> */}
+				<p>{aComment.content}</p>
+				<p>{aComment.drink_name}</p>
+				<p>{aComment.drink_score}</p>
+			</div>
+		)
+	})
 
 
 	return (
@@ -133,7 +159,7 @@ export default function Result(props) {
 
 
 			<ul>
-				{/* {commentList} */}
+				{commentList}
 			</ul>
 
 			<div>
