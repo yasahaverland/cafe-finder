@@ -53,6 +53,7 @@ export default function Search (props) {
                     </p>
                 </div>
             </form>
+            <Results results={[]}/>
       </div>   
     )
 }
