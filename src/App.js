@@ -114,7 +114,9 @@ const [cafeInfo, setCafeInfo] = useState({})
         <Routes>
           <Route 
             path="/"
-            element={<Welcome results={results} setResults={setResults} search={search} setSearch={setSearch}/>}
+            element={<Welcome 
+              results={results} setResults={setResults} search={search} setSearch={setSearch}
+              />}
           />
 
           <Route 
@@ -140,11 +142,11 @@ const [cafeInfo, setCafeInfo] = useState({})
           {/* <Route path="/results/:yelpId"
                 element={<Result/>}
           /> */}
-          <Route path='/search' element={<Search/>} />
+          <Route path='/search' element={<Search results={results} setResults={setResults} search={search} setSearch={setSearch}/>} />
           {/* Addition for a results route */}
           <Route path='/search/results/:location' element={<Results results={results} setResults={setResults} search={search} setSearch={setSearch}/>} />
 
-          <Route path='/cafes/:yelpId' element={<Result results={results} setResults={setResults} search={search} setSearch={setSearch} cafeInfo={cafeInfo} setCafeInfo={setCafeInfo} />} />
+          <Route path='/cafes/:yelpId' element={<Result currentUser={currentUser} results={results} setResults={setResults} search={search} setSearch={setSearch} cafeInfo={cafeInfo} setCafeInfo={setCafeInfo} />} />
           
             {/* <p>[businesses, amountResults, searchParams, setSearchParams]</p> */}
       

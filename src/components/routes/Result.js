@@ -1,11 +1,21 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { Navigate, useNavigate ,useParams } from 'react-router-dom'
+import Profile from '../pages/Profile'
 
 export default function Result(props) {
 	const { yelpId } = useParams()
 	const [comments, setComments] = useState([])
+	const [form, setForm] = useState({
+					yelpId: '',
+                    name: '',
+                    location: '',
+                    website_link: '',
+                    phone_number: '',
+                    price: ''
+				})
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		const getResult = async () => {
@@ -20,6 +30,21 @@ export default function Result(props) {
 		getResult()
 		
 	}, [])
+	console.log('TEST', props.cafeInfo)
+	const cafeSingle = props.cafeInfo
+	console.log(cafeSingle)
+
+	const handleSubmit = async e => {
+		try{
+			e.preventDefault()
+			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}`, form)
+			// /${props.currentUser.id}
+			navigate('/profile')
+		} catch(err) {
+			console.warn(err)
+		}
+	}
+
 
 	// let cafe = props.cafeInfo.map(result => {
 	// 	return (
@@ -61,7 +86,13 @@ export default function Result(props) {
 			<ul>
 				{commentList}
 			</ul>
+			<button>Save</button>
 
+			<form onSubmit={handleSubmit} >
+				{/* type='hidden' */}
+				<input  type='text' name='yelpId' value={cafeSingle.yelpId} onChange={e => setForm({...form, yelpId: e.target.value})}/>
+				<button type='submit'>save</button>
+			</form>
 		</div>
 
 	)
