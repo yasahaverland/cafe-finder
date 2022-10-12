@@ -15,6 +15,7 @@ import Navbar from './components/Navbar'
 import './App.css'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios' 
+import Search from './components/routes/Search'
 
 // export function App (term, location)
 
@@ -75,7 +76,7 @@ function App(term, location) {
 
 const [search, setSearch] = useState('92886')
 const [results, setResults] = useState([])
-const [cafeInfo, setCafeInfo] = useState({})
+const [cafeInfo, setCafeInfo] = useState({ comment: []})
 
   // useEffect -- if the user navigates away form the page, we will log them back in
   useEffect(() => {
@@ -113,7 +114,9 @@ const [cafeInfo, setCafeInfo] = useState({})
         <Routes>
           <Route 
             path="/"
-            element={<Welcome results={results} setResults={setResults} search={search} setSearch={setSearch}/>}
+            element={<Welcome 
+              results={results} setResults={setResults} search={search} setSearch={setSearch}
+              />}
           />
 
           <Route 
@@ -129,7 +132,7 @@ const [cafeInfo, setCafeInfo] = useState({})
           {/* conditionally render auth locked routes */}
           <Route 
             path="/profile"
-            element={currentUser ? <Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <Navigate to="/login" />}
+            element={currentUser ? <Profile handleLogout={handleLogout} currentUser={currentUser} setCurrentUser={setCurrentUser} cafeInfo={cafeInfo} setCafeInfo={setCafeInfo}  /> : <Navigate to="/login" />}
           />
 
           {/* <Route path="/results"
@@ -139,9 +142,9 @@ const [cafeInfo, setCafeInfo] = useState({})
           {/* <Route path="/results/:yelpId"
                 element={<Result/>}
           /> */}
-
+          <Route path='/search' element={<Search results={results} setResults={setResults} search={search} setSearch={setSearch}/>} />
           {/* Addition for a results route */}
-          <Route path='/results/:location' element={<Results results={results} setResults={setResults} search={search} setSearch={setSearch}/>} />
+          <Route path='/search/results/:location' element={<Results results={results} setResults={setResults} search={search} setSearch={setSearch}/>} />
 
           <Route path='/cafes/:yelpId' element={<Result currentUser={currentUser} results={results} setResults={setResults} search={search} setSearch={setSearch} cafeInfo={cafeInfo} setCafeInfo={setCafeInfo} />} />
           

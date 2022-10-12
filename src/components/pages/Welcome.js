@@ -3,19 +3,27 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Results from '../routes/Results'
 import Result from '../routes/Result'
-import { Navigate } from 'react-router-dom'
+import Search from '../routes/Search'
 // import { Link } from 'react-router-dom'
 
 export default function Welcome(props) {
-    // const [search, setSearch] = useState('92886')
-    // const [results, setResults] = useState([])
+    const [search, setSearch] = useState('92886')
+    const [results, setResults] = useState([])
     const { location } = useParams()
     const navigate = useNavigate()
 
     useEffect(() => {
         const getResults = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/results/${props.search}`)
+                // get the token from local storage
+				const token = localStorage.getItem('jwt')
+				// make the auth headers
+				const options = {
+					headers: {
+						'Authorization': token
+					}
+				}
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/results/${props.search}`, options)
                 props.setResults(response.data.businesses) 
             } catch(err) {
                 console.warn(err)
@@ -32,20 +40,12 @@ export default function Welcome(props) {
             // console.log('CONSOLELOG',response.data)
             props.setResults(response.data.businesses)
             // location = props.search
-            navigate(`/results/${props.search}`)
+            navigate(`/search/results/${props.search}`)
         } catch(err){
             console.log(err)
         }
     }
 
-    // const cafeLinks = props.cafeLink.map(cafeLink => {
-    //     return (
-    //         <li key={`cafeLink${cafeLink.id}`}>
-    //             <Link to={`/cafes/${cafeLink.id}`}>{cafeLink.</Link>
-    //         </li>
-
-    //     )
-    // })
 
     return (
         <div>
@@ -63,15 +63,11 @@ export default function Welcome(props) {
                     <p>
                         <button type="submit" >Search</button> 
                     </p>
-                    {/* {cafeLinks} */}
                 </div>
-            </form>
+            </form> 
             <Results 
                 results={props.results}
             />
-            {/* <Result 
-                results={results}
-            /> */}
         </div>
     )
 }
