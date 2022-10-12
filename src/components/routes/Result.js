@@ -1,7 +1,8 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { Navigate, useNavigate ,useParams } from 'react-router-dom'
+import Profile from '../pages/Profile'
 
 export default function Result(props) {
 	const { yelpId } = useParams()
@@ -23,6 +24,21 @@ export default function Result(props) {
 
 
 	}, [])
+	console.log('TEST', props.cafeInfo)
+	const cafeSingle = props.cafeInfo
+	console.log(cafeSingle)
+
+	const handleSubmit = async e => {
+		try{
+			e.preventDefault()
+			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}`, form)
+			// /${props.currentUser.id}
+			navigate('/profile')
+		} catch(err) {
+			console.warn(err)
+		}
+	}
+
 
 	const getSaveConditional = async (e) => {
 		try {
@@ -91,6 +107,7 @@ export default function Result(props) {
 			<ul>
 				{commentList}
 			</ul>
+			<button>Save</button>
 
 			<form onSubmit={getSaveConditional} >
                 {/* type='hidden' */}

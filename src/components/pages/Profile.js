@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-export default function Profile({ currentUser, handleLogout }) {
+export default function Profile({ currentUser, handleLogout}) {
 	// state for the secret message (aka user privilaged data)
 	const [msg, setMsg] = useState('')
 
