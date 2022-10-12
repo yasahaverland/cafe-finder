@@ -146,7 +146,7 @@ const [cafeInfo, setCafeInfo] = useState({ comment: []})
           {/* Addition for a results route */}
           <Route path='/search/results/:location' element={<Results results={results} setResults={setResults} search={search} setSearch={setSearch}/>} />
 
-          <Route path='/cafes/:yelpId' element={<Result currentUser={currentUser} results={results} setResults={setResults} search={search} setSearch={setSearch} cafeInfo={cafeInfo} setCafeInfo={setCafeInfo} />} />
+          <Route path='/cafes/:yelpId' element={<Result currentUser={currentUser} setCurrentUser={setCurrentUser} results={results} setResults={setResults} search={search} setSearch={setSearch} cafeInfo={cafeInfo} setCafeInfo={setCafeInfo} />} />
           
             {/* <p>[businesses, amountResults, searchParams, setSearchParams]</p> */}
       
