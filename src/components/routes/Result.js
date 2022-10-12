@@ -49,15 +49,18 @@ export default function Result(props) {
 			const theCafe = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}`)
 			console.log(theCafe.data)
 
-			const cafeArr = theCafe.data.user.map(userId => {
+			const cafeArr = theCafe.data.foundCafe.user.map(userId => {
 				return (
 					userId._id
 				)
 			})
+
+			console.log('CAFE ARRR',cafeArr)
 			
 			// save the token in localstorage
 			const { token } = theCafe.data
 			localStorage.setItem('jwt', token)
+			
 			
 			// decode the token
 			const decoded = jwt_decode(token)
