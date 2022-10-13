@@ -58,10 +58,8 @@ export default function Result(props) {
 
 			if (cafeArr.includes(props.currentUser.id)) { // checks if the cafe has the current user inside of it
 				setSaveButton("Unsave Cafe")
-				console.log(saveButton)
 			} else {
 				setSaveButton("Save Cafe")
-				console.log(saveButton)
 			}
 
 		} catch (err) {
@@ -178,8 +176,6 @@ export default function Result(props) {
 				<p>{aComment.content}</p>
 				<p>{aComment.drink_name}</p>
 				<p>{aComment.drink_score}</p>
-				{console.log(props.currentUser)}
-				
 
 				{aComment.user._id == (props.currentUser != null ? props.currentUser.id : 1) ? deleteEdit : null}
 			</div>

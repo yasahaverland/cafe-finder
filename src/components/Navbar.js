@@ -1,19 +1,18 @@
 import { Link } from 'react-router-dom'
+import styles from './Navbar.module.css'
 
 export default function Navbar({ currentUser, handleLogout }) {
 	 const loggedIn = (
-		<>
-		<div className='nav-bar'>
+
+		<div className={styles['nav-bar']}>
 			{/* if the user is logged in... */}
-			<Link className='links' to="/search">Search</Link>
+			<Link className={styles['links']} to="/search">Search</Link>
 			
-			<Link className='links' to="/profile">
+			<Link className={styles['links']} to="/profile">
 				Profile
 			</Link>
-
-			<Link className='links' to="/profile"> Saved Cafes </Link>
 			
-			<Link className='links' to="/">
+			<Link className={styles['links']} to="/">
 				<p onClick={handleLogout}>Logout  </p>
 			</Link>
 
@@ -21,28 +20,28 @@ export default function Navbar({ currentUser, handleLogout }) {
 			
 		
 		</div>
-		</>
+	
 	 )
 
 	 const loggedOut = (
-		<>
-		<div className='nav-bar'>
+		
+		<div className={styles['nav-bar']}>
 			{/* if the user is not logged in... */}
-			<Link className='links' to="/register">
+			<Link className={styles['links']} to="/register">
 				register  
 			</Link>
 
-			<Link className='links' to="/login">
+			<Link className={styles['links']} to="/login">
 				login
 			</Link>
 		</div>
-		</>
+	
 	 )
 
 	return (
-		<nav className='nav-bar'>
+		<nav className={styles['nav-bar']}>
 			{/* user always sees this section */}
-			<Link to="/">
+			<Link className={styles['links']} to="/">
 				<p>Home</p>
 			</Link>
 
