@@ -19,9 +19,9 @@ export default function Profile(props) {
 	// map the cafeSaves arr
 	const displaySaves = cafeSaves.map((save, i) => {
 		return(
-			<li key={`save${i}`}>
+			<div key={`save${i}`}>
 				<Link to={`/cafes/${save.yelpId}`}><h2 class-name='item1'>{save.name}</h2></Link> 
-			</li>
+			</div>
 			
 		)
 	})
@@ -70,7 +70,7 @@ export default function Profile(props) {
 
 
 		// <div class="card mb-4">
-		<div class="card-body text-center">
+		<div class='bg'>
 			{/* <img src="https://i.imgur.com/P3NYRmG.png" alt="avatar"
 			class="rounded-circle img-fluid" style="width: 150px;" > */}
 			<h5 class="my-3">Just brew it {props.currentUser.name}</h5>
@@ -78,6 +78,7 @@ export default function Profile(props) {
 			<div class="d-flex justify-content-center mb-2">
 			<p class="text-muted mb-0">{displaySaves}</p>
 			</div>
+			
 		</div>
 		// </div>
 
