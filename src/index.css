@@ -119,3 +119,10 @@ color: #f4ead8;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.form-input {
+  width: 40%;
+  height: 100px;
+  padding: 10px;
+  background-color: #ffffff;
+}
