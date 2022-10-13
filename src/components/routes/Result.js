@@ -33,15 +33,6 @@ export default function Result(props) {
 
 	}, [])
 
-	// const handleSubmit = async e => {
-	// 	try {
-	// 		e.preventDefault()
-	// 		const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}`)
-	// 	} catch (err) {
-	// 		console.warn(err)
-	// 	}
-	// }
-
 
 	// decode token here with the save cafe variable
 	const getSaveConditional = async (e) => {
@@ -183,13 +174,14 @@ export default function Result(props) {
 		)
 		return (
 			<div>
-				{/* <h2>{aComment.populate('user')}</h2> */}
+				<h2>{aComment.user.name}</h2>
 				<p>{aComment.content}</p>
 				<p>{aComment.drink_name}</p>
 				<p>{aComment.drink_score}</p>
-				{console.log(aComment)}
+				{console.log(props.currentUser)}
+				
 
-				{/* {aComment.user.includes(props.currentUser.id) ? deleteEdit : null} */}
+				{aComment.user._id == (props.currentUser != null ? props.currentUser.id : 1) ? deleteEdit : null}
 			</div>
 		)
 	})
@@ -245,7 +237,6 @@ export default function Result(props) {
 
 			<ul>
 				{commentList}
-				{console.log(props.cafeInfo)}
 			</ul>
 
 			<div>
