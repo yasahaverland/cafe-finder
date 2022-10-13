@@ -204,16 +204,15 @@ export default function Result(props) {
 			</form>
 
 
-			<div class="comments-section">
+			{/* <div class="comments-section">
 			<ul>
 				{commentList}
 			</ul>
-			</div>
+			</div> */}
 
 			<div>
 
-
-				<form onSubmit={createComment} >
+				{/* <form onSubmit={createComment} > */}
 					{/* <div className="comment-box">
 						<div className="comment-review">
 							<label htmlFor="comment">Review:</label>
@@ -242,49 +241,55 @@ export default function Result(props) {
 					</div> */}
 
 
-<form class="form-block">
-		<div class="row">
-			<div class="col-xs-12 col-sm-6">
-				<div class="form-group fl_icon">
-					<div class="icon"><i class="fa fa-user"></i></div>
-					<input 
-						type='text'
-						id='drink_name'
-						onChange={e => { setDrinkName(e.target.value) }}
-						value={drinkName} 
-						placeholder="Drink Name"
-					/>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-6 fl_icon">
-				<div class="form-group fl_icon">
-					<div class="icon"><i class="fa fa-envelope-o"></i></div>
-					<input 
-						type='text'
-						id='drink_score'
-						onChange={e => { setDrinkScore(e.target.value) }}
-						value={drinkScore} 
-						placeholder="Drink Score"
-					/>
-				</div>
-			</div>
-			<div class="col-xs-12">									
-				<div class="review-box">
-					<textarea 
-						class="form-input" 
-						id="content"
-						name='content'
-						onChange={e => { setContent(e.target.value) }}
-						value={content} placeholder="Write a review"></textarea>
-				</div>
-			</div>
-			<button class="btn btn-primary pull-right">submit</button>
-		</div>
-	</form>
+			<form class="form-block" onSubmit={createComment} >
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="form-group fl_icon">
+								<div class="icon"><i class="fa fa-user"></i></div>
+								<input 
+									type='text'
+									id='drink_name'
+									onChange={e => { setDrinkName(e.target.value) }}
+									value={drinkName} 
+									placeholder="Drink Name"
+								/>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 fl_icon">
+							<div class="form-group fl_icon">
+								<div class="icon"><i class="fa fa-envelope-o"></i></div>
+								<input 
+									type='text'
+									id='drink_score'
+									onChange={e => { setDrinkScore(e.target.value) }}
+									value={drinkScore} 
+									placeholder="Drink Score"
+								/>
+							</div>
+						</div>
+						<div class="col-xs-12">									
+							<div class="review-box">
+								<textarea 
+									class="form-input" 
+									id="content"
+									name='content'
+									onChange={e => { setContent(e.target.value) }}
+									value={content} placeholder="Write a review"></textarea>
+							</div>
+						</div>
+						<button class="btn btn-primary pull-right">submit</button>
+					</div>
 				</form>
-			</div>
-
 		</div>
+
+		<div class="comments-section">
+			<ul>
+				{commentList}
+			</ul>
+		</div>
+
+
+	</div>
 
 	)
 }
