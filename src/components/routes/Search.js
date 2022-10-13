@@ -37,7 +37,8 @@ export default function Search (props) {
     return (
 
         <div>
-           <h1>SEARCH BAR</h1>  
+           <h1 className={styles['title']}>Expresso Yourself</h1>
+           <p className={styles['sub-title']}>Search new Cafes near you</p>  
     
             <form onSubmit={handleSubmit}>
                 <div className='search-bar'>
@@ -52,9 +53,7 @@ export default function Search (props) {
                 </div>
             </form>
 
-            <div className={styles['results-render']}>
-                <Results results={[]}/> 
-            </div>
+            <Results results={[]}/> 
            
       </div>   
     )

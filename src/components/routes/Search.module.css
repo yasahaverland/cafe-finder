@@ -1,3 +1,18 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Pacifico&display=swap');
+
+.title {
+    margin-top: 50px;
+    font-family: 'Pacifico', cursive;
+    font-size: 70px;
+    color: #f4ead8;
+}
+.sub-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 40px;
+    color: #f4ead8;
+    margin-bottom: 40px;
+}
 .search-bar {
     box-sizing: border-box;
     clear: both;
@@ -25,8 +40,8 @@ input {
     color: #aea9a9;
     align-items: center;
     font-size: 1rem;
-    height: 2.5em;
-    width: 250px;
+    height: 48px;
+    width: 280px;
     line-height: 1.5;
     padding-bottom: calc(0.5em - 1px);
     padding-left: calc(0.75em - 1px);
@@ -48,10 +63,7 @@ input {
     border-radius: 0px 10px 10px 0px;
     background-color: #0E0504;
     color: #f4ead8;
-    height: 40px;
-    width: 50px;
-}
-
-.results-render {
-    margin-top: 100px;
+    height: 3rem;
+    width: 70px;
+    font-size: large;
 }
