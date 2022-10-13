@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import styles from './Navbar.module.css'
 
+
 export default function Navbar({ currentUser, handleLogout }) {
 	 const loggedIn = (
 
@@ -41,7 +42,7 @@ export default function Navbar({ currentUser, handleLogout }) {
 	return (
 		<nav className={styles['nav-bar']}>
 			{/* user always sees this section */}
-			<Link className={styles['links']} to="/">
+			<Link className='links' to="/">
 				<p>Home</p>
 			</Link>
 
