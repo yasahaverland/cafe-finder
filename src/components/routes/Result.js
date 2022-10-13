@@ -11,6 +11,9 @@ export default function Result(props) {
 	const [content, setContent] = useState("")
 	const [drinkName, setDrinkName] = useState("")
 	const [drinkScore, setDrinkScore] = useState("")
+	const [editContent, setEditContent] = useState("")
+	const [editDrinkName, setEditDrinkName] = useState("")
+	const [editDrinkScore, setEditDrinkScore] = useState("")
 	const [saveButton, setSaveButton] = useState("Save Button Operator")
 
 	const navigate = useNavigate()
@@ -32,14 +35,14 @@ export default function Result(props) {
 
 	}, [])
 
-	const handleSubmit = async e => {
-		try {
-			e.preventDefault()
-			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}`)
-		} catch (err) {
-			console.warn(err)
-		}
-	}
+	// const handleSubmit = async e => {
+	// 	try {
+	// 		e.preventDefault()
+	// 		const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}`)
+	// 	} catch (err) {
+	// 		console.warn(err)
+	// 	}
+	// }
 
 
 	// decode token here with the save cafe variable
@@ -47,7 +50,6 @@ export default function Result(props) {
 		try {
 			e.preventDefault()
 			const theCafe = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}`)
-			console.log(theCafe.data)
 
 			const cafeArr = theCafe.data.foundCafe.user.map(userId => {
 				return (
@@ -65,7 +67,6 @@ export default function Result(props) {
 			// set the user in App's state to be the decoded token
 			props.setCurrentUser(decoded)
 
-			console.log(cafeArr)
 			if (cafeArr.includes(props.currentUser.id)) { // checks if the cafe has the current user inside of it
 				setSaveButton("Unsave Cafe")
 				console.log(saveButton)
@@ -98,7 +99,33 @@ export default function Result(props) {
 
 			// set the user in App's state to be the decoded token
 			props.setCurrentUser(decoded)
-			props.setCafeInfo(addComment.data)
+			props.setCafeInfo(addComment.data.foundCafe)
+			navigate(`/cafes/${yelpId}`)
+		} catch (err) {
+			console.warn(err)
+		}
+	}
+
+	const editComment = async e => {
+		try {
+			e.preventDefault()
+			const editComment = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}/comments`,
+				{
+					content: editContent,
+					drink_name: editDrinkName,
+					drink_score: editDrinkScore
+				}
+			)
+			// save the token in localstorage
+			const { token } = editComment.data
+			localStorage.setItem('jwt', token)
+
+			// decode the token
+			const decoded = jwt_decode(token)
+
+			// set the user in App's state to be the decoded token
+			props.setCurrentUser(decoded)
+			props.setCafeInfo(editComment.data.foundCafe)
 			navigate(`/cafes/${yelpId}`)
 		} catch (err) {
 			console.warn(err)
@@ -107,7 +134,7 @@ export default function Result(props) {
 
 	const deleteComment = async () => {
 		try {
-			const deleteComment = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}/comments`)
+			const deleteComment = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}/comments`)
 			// save the token in localstorage
 			const { token } = deleteComment.data
 			localStorage.setItem('jwt', token)
@@ -117,14 +144,13 @@ export default function Result(props) {
 
 			// set the user in App's state to be the decoded token
 			props.setCurrentUser(decoded)
-			props.setCafeInfo(deleteComment.data)
+			props.setCafeInfo(deleteComment.data.foundCafe)
 			navigate(`/cafes/${yelpId}`)
 		} catch (err) {
 			console.warn(err)
 		}
 	}
 
-	// console.log(props.cafeInfo)
 
 	const commentList = props.cafeInfo.comment.map(aComment => {
 		return (
@@ -133,6 +159,33 @@ export default function Result(props) {
 				<p>{aComment.content}</p>
 				<p>{aComment.drink_name}</p>
 				<p>{aComment.drink_score}</p>
+				<button onClick={deleteComment} >Delete Comment</button>
+
+				{/* add form hiding here */}
+				<form onSubmit={editComment}> 
+					<label htmlFor="comment">Review:</label>
+					<textarea
+						id="content"
+						name='content'
+						onChange={e => { setEditContent(e.target.value) }}
+						value={editContent}
+					></textarea>
+					<label htmlFor="comment">Drink Name:</label>
+					<input
+						type='text'
+						id='drink_name'
+						onChange={e => { setEditDrinkName(e.target.value) }}
+						value={editDrinkName}
+					/>
+					<label htmlFor="comment">Drink Score:</label>
+					<input
+						type='text'
+						id='drink_score'
+						onChange={e => { setEditDrinkScore(e.target.value) }}
+						value={editDrinkScore}
+					/>
+					<button type='submit'>Edit Comment</button>
+				</form>
 			</div>
 		)
 	})

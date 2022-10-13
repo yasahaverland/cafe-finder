@@ -13,7 +13,8 @@ export default function Profile(props) {
 
 	const cafeSaves = props.currentUser.cafe
 
-	console.log('USERS SAVED CAFES', cafeSaves)
+	// console.log('USERS SAVED CAFES', cafeSaves)
+	console.log(props.currentUser)
 
 	// map the cafeSaves arr
 	const displaySaves = cafeSaves.map((save, i) => {
