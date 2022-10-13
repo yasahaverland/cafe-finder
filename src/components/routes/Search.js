@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Results from './Results'
+import styles from './Search.module.css'
 
 export default function Search (props) {
 
@@ -36,24 +37,24 @@ export default function Search (props) {
     return (
 
         <div>
-           <h1>SEARCH BAR</h1>  
+           <h1 className={styles['title']}>Expresso Yourself</h1>
+           <p className={styles['sub-title']}>Search new Cafes near you</p>  
     
             <form onSubmit={handleSubmit}>
-                <div>
-                     <p>
+                <div className='search-bar'>
                         <input
                             type ='text'
                             placeholder='enter a location'
                             value={props.search.location}
                             onChange={(e) => props.setSearch(e.target.value)}
                             />
-                    </p>
-                    <p>
-                        <button type="submit" >Search</button> 
-                    </p>
+                        
+                        <button className={styles['search-btn']} type="submit" ><i className="fa-solid fa-magnifying-glass-location"></i></button>
                 </div>
             </form>
-            <Results results={[]}/>
+
+            <Results results={[]}/> 
+           
       </div>   
     )
 }

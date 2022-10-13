@@ -1,0 +1,18 @@
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0.5rem;
+    background-image: url('https://images-ext-2.discordapp.net/external/FLDhBAmii6BCo2kQ7NResunBLAFvr0MKgLT9ncrEMxI/https/i.imgur.com/Cl7Ps3g.jpg');
+    font-size: 20px;
+  }
+.links {
+    display: flex;
+    justify-content: space-around;
+    margin-left: 15px;
+    color: #f4ead8;
+    font-family: 'Arial Black';
+   }
+
+

@@ -4,6 +4,7 @@ import axios from 'axios'
 import Results from '../routes/Results'
 import Result from '../routes/Result'
 import Search from '../routes/Search'
+import styles from './Welcome.module.css'
 // import { Link } from 'react-router-dom'
 
 export default function Welcome(props) {
@@ -49,22 +50,21 @@ export default function Welcome(props) {
 
     return (
         <div>
-            <h1>Welcome start searching for a cafe:</h1>
+            <h1 className={styles['header']}>The Perfect Blend</h1>
+            <h3 className={styles['coffee-joke']}>Start searching for a bitter coffee...</h3>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <p>
+                <div className='search-bar'>
                         <input
                             type ='text'
                             placeholder='enter a location'
                             value={props.search.location}
                             onChange={(e) => props.setSearch(e.target.value)}
                         />
-                    </p>
-                    <p>
-                        <button type="submit" >Search</button> 
-                    </p>
+
+                        <button className={styles['search-btn']} type="submit" ><i className="fa-solid fa-magnifying-glass-location"></i></button>
                 </div>
             </form> 
+
             <Results 
                 results={props.results}
             />
