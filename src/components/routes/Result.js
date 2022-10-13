@@ -100,7 +100,7 @@ export default function Result(props) {
 
 			// set the user in App's state to be the decoded token
 			props.setCurrentUser(decoded)
-			props.setCafeInfo(addComment.data)
+			props.setCafeInfo(addComment.data.foundCafe)
 			navigate(`/cafes/${yelpId}`)
 		} catch (err) {
 			console.warn(err)
@@ -109,7 +109,7 @@ export default function Result(props) {
 
 	const deleteComment = async () => {
 		try {
-			const deleteComment = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}/comments`)
+			const deleteComment = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}/comments`)
 			// save the token in localstorage
 			const { token } = deleteComment.data
 			localStorage.setItem('jwt', token)
@@ -119,7 +119,8 @@ export default function Result(props) {
 
 			// set the user in App's state to be the decoded token
 			props.setCurrentUser(decoded)
-			props.setCafeInfo(deleteComment.data)
+			console.log(deleteComment.data)
+			props.setCafeInfo(deleteComment.data.foundCafe)
 			navigate(`/cafes/${yelpId}`)
 		} catch (err) {
 			console.warn(err)
@@ -135,6 +136,7 @@ export default function Result(props) {
 				<p>{aComment.content}</p>
 				<p>{aComment.drink_name}</p>
 				<p>{aComment.drink_score}</p>
+				<button onClick={ deleteComment } >Delete Comment</button>
 			</div>
 		)
 	})
