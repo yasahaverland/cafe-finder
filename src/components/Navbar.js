@@ -42,7 +42,7 @@ export default function Navbar({ currentUser, handleLogout }) {
 	return (
 		<nav className={styles['nav-bar']}>
 			{/* user always sees this section */}
-			<Link className='links' to="/">
+			<Link  className={styles['links']} to="/">
 				<p>Home</p>
 			</Link>
 
