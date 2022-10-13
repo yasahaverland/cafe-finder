@@ -28,9 +28,8 @@ export default function Result(props) {
 		getResult()
 
 
-
-
 	}, [])
+
 
 	// decode token here with the save cafe variable
 	const getSaveConditional = async (e) => {
@@ -121,16 +120,81 @@ export default function Result(props) {
 	// console.log(props.cafeInfo)
 
 	const commentList = props.cafeInfo.comment.map(aComment => {
+		const deleteEdit = (
+			<div>
+      
+				<button onClick={deleteComment} >Delete Comment</button>
+
+				<form onSubmit={editComment}>
+					<label htmlFor="comment">Review:</label>
+					<textarea
+						id="content"
+						name='content'
+						onChange={e => { setEditContent(e.target.value) }}
+						value={editContent}
+					></textarea>
+					<label htmlFor="comment">Drink Name:</label>
+					<input
+						type='text'
+						id='drink_name'
+						onChange={e => { setEditDrinkName(e.target.value) }}
+						value={editDrinkName}
+					/>
+					<label htmlFor="comment">Drink Score:</label>
+					<input
+						type='text'
+						id='drink_score'
+						onChange={e => { setEditDrinkScore(e.target.value) }}
+						value={editDrinkScore}
+					/>
+					<button type='submit'>Edit Comment</button>
+				</form>
+
+			</div>
+		)
 		return (
 			<div>
-				{/* <h2>{aComment.populate('user')}</h2> */}
+				<h2>{aComment.user.name}</h2>
 				<p>{aComment.content}</p>
 				<p>{aComment.drink_name}</p>
 				<p>{aComment.drink_score}</p>
-				<button onClick={ deleteComment } >Delete Comment</button>
+				{console.log(props.currentUser)}
+				
+
+				{aComment.user._id == (props.currentUser != null ? props.currentUser.id : 1) ? deleteEdit : null}
 			</div>
 		)
 	})
+
+	const addCommentForm = () => {
+		return (
+			<form onSubmit={createComment} >
+
+				<label htmlFor="comment">Review:</label>
+				<textarea
+					id="content"
+					name='content'
+					onChange={e => { setContent(e.target.value) }}
+					value={content}
+				></textarea>
+				<label htmlFor="comment">Drink Name:</label>
+				<input
+					type='text'
+					id='drink_name'
+					onChange={e => { setDrinkName(e.target.value) }}
+					value={drinkName}
+				/>
+				<label htmlFor="comment">Drink Score:</label>
+				<input
+					type='text'
+					id='drink_score'
+					onChange={e => { setDrinkScore(e.target.value) }}
+					value={drinkScore}
+				/>
+				<button type='submit'>Submit Comment</button>
+			</form>
+		)
+	}
 
 
 	return (
@@ -158,31 +222,7 @@ export default function Result(props) {
 			<div>
 
 
-				<form onSubmit={createComment} >
-
-					<label htmlFor="comment">Review:</label>
-					<textarea
-						id="content"
-						name='content'
-						onChange={e => { setContent(e.target.value) }}
-						value={content}
-					></textarea>
-					<label htmlFor="comment">Drink Name:</label>
-					<input
-						type='text'
-						id='drink_name'
-						onChange={e => { setDrinkName(e.target.value) }}
-						value={drinkName}
-					/>
-					<label htmlFor="comment">Drink Score:</label>
-					<input
-						type='text'
-						id='drink_score'
-						onChange={e => { setDrinkScore(e.target.value) }}
-						value={drinkScore}
-					/>
-					<button type='submit'>Submit Comment</button>
-				</form>
+				{props.currentUser ? addCommentForm() : null}
 			</div>
 
 		</div>
