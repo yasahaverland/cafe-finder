@@ -14,7 +14,7 @@ export default function Result(props) {
 	const [editContent, setEditContent] = useState("")
 	const [editDrinkName, setEditDrinkName] = useState("")
 	const [editDrinkScore, setEditDrinkScore] = useState("")
-	const [saveButton, setSaveButton] = useState("Save Cafe")
+	const [saveButton, setSaveButton] = useState("Save Button Operator")
 
 	const navigate = useNavigate()
 
@@ -31,18 +31,7 @@ export default function Result(props) {
 		getResult()
 
 
-
-
 	}, [])
-
-	// const handleSubmit = async e => {
-	// 	try {
-	// 		e.preventDefault()
-	// 		const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}`)
-	// 	} catch (err) {
-	// 		console.warn(err)
-	// 	}
-	// }
 
 
 	// decode token here with the save cafe variable
@@ -69,10 +58,8 @@ export default function Result(props) {
 
 			if (cafeArr.includes(props.currentUser.id)) { // checks if the cafe has the current user inside of it
 				setSaveButton("Unsave Cafe")
-				console.log(saveButton)
 			} else {
 				setSaveButton("Save Cafe")
-				console.log(saveButton)
 			}
 
 		} catch (err) {
@@ -153,147 +140,145 @@ export default function Result(props) {
 
 
 	const commentList = props.cafeInfo.comment.map(aComment => {
-		return (
+		const deleteEdit = (
 			<div>
-				{/* <h2>{aComment.populate('user')}</h2> */}
-				<p>{aComment.content}</p>
-				<p>{aComment.drink_name}</p>
-				<p>{aComment.drink_score}</p>
-				<button onClick={deleteComment} >Delete Comment</button>
+				<button class="btn btn-primary" onClick={deleteComment} >Delete Comment</button>
 
-				{/* add form hiding here */}
-				<form onSubmit={editComment}> 
-					<label htmlFor="comment">Review:</label>
+				<form onSubmit={editComment}>
+
+				<div class="row mb-3">
+					<label className='font' htmlFor="comment">Review:</label>
 					<textarea
 						id="content"
 						name='content'
 						onChange={e => { setEditContent(e.target.value) }}
 						value={editContent}
+						class="col-sm-2 col-form-label col-form-label-lg"
 					></textarea>
-					<label htmlFor="comment">Drink Name:</label>
+				</div>
+
+				<div class="row mb-3">
+					<label className='font' htmlFor="comment">Drink Name:</label>
 					<input
 						type='text'
 						id='drink_name'
 						onChange={e => { setEditDrinkName(e.target.value) }}
 						value={editDrinkName}
+						class="col-sm-2 col-form-label"
 					/>
-					<label htmlFor="comment">Drink Score:</label>
+				</div>
+
+				<div class="row mb-3">
+					<label className='font' htmlFor="comment">Drink Score:</label>
 					<input
 						type='text'
 						id='drink_score'
 						onChange={e => { setEditDrinkScore(e.target.value) }}
 						value={editDrinkScore}
+						class="col-sm-2 col-form-label"
 					/>
+				</div>
+
+
 					<button type='submit'>Edit Comment</button>
+
 				</form>
 			</div>
 		)
+		return (
+			<div class="row mb-3">
+				<h2 className='font'>{aComment.user.name}</h2>
+				<p className='font'>{aComment.content}</p>
+				<p className='font'>{aComment.drink_name}</p>
+				<p className='font'>{aComment.drink_score}</p>
+
+				{aComment.user._id == (props.currentUser != null ? props.currentUser.id : 1) ? deleteEdit : null}
+			</div>
+		)
 	})
+
+	const addCommentForm = () => {
+		return (
+			
+				<form onSubmit={createComment} >
+
+				<div class="row mb-3">
+					<label className='font' htmlFor="comment">Review:</label>
+					<textarea
+						id="content"
+						name='content'
+						onChange={e => { setContent(e.target.value) }}
+						value={content}
+						class="col-sm-2 col-form-label col-form-label-lg"
+					></textarea>
+				</div>
+
+				<div class="row mb-3">
+					<label className='font' htmlFor="comment">Drink Name:</label>
+					<input
+						type='text'
+						id='drink_name'
+						onChange={e => { setDrinkName(e.target.value) }}
+						value={drinkName}
+						class="col-sm-2 col-form-label"
+					/>
+				</div>
+
+				<div class="row mb-3">
+					<label className='font' htmlFor="comment">Drink Score:</label>
+					<input
+						type='text'
+						id='drink_score'
+						onChange={e => { setDrinkScore(e.target.value) }}
+						value={drinkScore}
+						class="col-sm-2 col-form-label"
+					/>
+				</div>
+
+					<button class="btn btn-primary" type='submit'>Submit Comment</button>
+
+				</form>
+			
+
+		)
+	}
+
+
+
 
 
 	return (
 		<div className='big-div'>
 			<h2 className='item1'>{props.cafeInfo.name}</h2>
-			<p className='item2'>{props.cafeInfo.location}</p>
-			<p className='item3'>{props.cafeInfo.price}</p>
-			<a style={{ textDecoration: 'none', color: 'blue' }} target="_blank" href={`${props.cafeInfo.website_link}`}>Check out this cafe on Yelp</a>
-			<p className='item4'>{props.cafeInfo.phone_number}</p>
+			<div className='item2'>
+				<img src='https://cdn.pixabay.com/photo/2017/02/16/08/38/icon-2070747__340.png' alt='Caffe Shopp icon' width='120px' height='150px'></img>
+			</div>
+
+			<p className='item3'>{props.cafeInfo.location}</p>
+			<p className='item4'>{props.cafeInfo.price}</p>
+			<a style={{ textDecoration: 'none', color: 'blue' }} target="_blank" href={`${props.cafeInfo.website_link}`}>Check this cafe on Yelp</a>
+			<p className='item5'>{props.cafeInfo.phone_number}</p>
 
 			<form onSubmit={getSaveConditional} >
-				<button className="button is-info" type='submit'>{saveButton}</button>
+				<button type='submit'>{saveButton}</button>
 			</form>
 
 
-			{/* <div class="comments-section">
+
 			<ul>
 				{commentList}
 			</ul>
-			</div> */}
 
 			<div>
 
-				{/* <form onSubmit={createComment} > */}
-					{/* <div className="comment-box">
-						<div className="comment-review">
-							<label htmlFor="comment">Review:</label>
-							<textarea
-								id="content"
-								name='content'
-								onChange={e => { setContent(e.target.value) }}
-								value={content}
-							></textarea>
-						</div>
-							<label htmlFor="comment">Drink Name:</label>
-							<input
-								type='text'
-								id='drink_name'
-								onChange={e => { setDrinkName(e.target.value) }}
-								value={drinkName}
-							/>
-							<label htmlFor="comment">Drink Score:</label>
-							<input
-								type='text'
-								id='drink_score'
-								onChange={e => { setDrinkScore(e.target.value) }}
-								value={drinkScore}
-							/>
-							<button type='submit'>Submit Comment</button>
-					</div> */}
 
+				{props.currentUser ? addCommentForm() : null}
+			</div>
 
-			<form class="form-block" onSubmit={createComment} >
-					<div class="row">
-						<div class="col-xs-12 col-sm-6">
-							<div class="form-group fl_icon">
-								<div class="icon"><i class="fa fa-user"></i></div>
-								<input 
-									type='text'
-									id='drink_name'
-									onChange={e => { setDrinkName(e.target.value) }}
-									value={drinkName} 
-									placeholder="Drink Name"
-								/>
-							</div>
-						</div>
-						<div class="col-xs-12 col-sm-6 fl_icon">
-							<div class="form-group fl_icon">
-								<div class="icon"><i class="fa fa-envelope-o"></i></div>
-								<input 
-									type='text'
-									id='drink_score'
-									onChange={e => { setDrinkScore(e.target.value) }}
-									value={drinkScore} 
-									placeholder="Drink Score"
-								/>
-							</div>
-						</div>
-						<div class="col-xs-12">									
-							<div class="review-box">
-								<textarea 
-									class="form-input" 
-									id="content"
-									name='content'
-									onChange={e => { setContent(e.target.value) }}
-									value={content} placeholder="Write a review"></textarea>
-							</div>
-						</div>
-						<button class="btn btn-primary pull-right">submit</button>
-					</div>
-				</form>
 		</div>
-
-		<div class="comments-section">
-			<ul>
-				{commentList}
-			</ul>
-		</div>
-
-
-	</div>
 
 	)
 }
-
 
 
 
