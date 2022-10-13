@@ -33,34 +33,38 @@ export default function Result(props) {
 
 	}, [])
 
+	// const handleSubmit = async e => {
+	// 	try {
+	// 		e.preventDefault()
+	// 		const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}`)
+	// 	} catch (err) {
+	// 		console.warn(err)
+	// 	}
+	// }
+
 
 	// decode token here with the save cafe variable
 	const getSaveConditional = async (e) => {
 		try {
 			e.preventDefault()
 			const theCafe = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}`)
-			console.log(theCafe.data)
 
-			const cafeArr = theCafe.data.foundCafe.user.map
-			(userId => {
+			const cafeArr = theCafe.data.foundCafe.user.map(userId => {
 				return (
-					userId
+					userId._id
 				)
 			})
 
-			console.log('CAFE ARRR', theCafe.data.foundCafe)
-			
 			// save the token in localstorage
 			const { token } = theCafe.data
 			localStorage.setItem('jwt', token)
-			
+
 			// decode the token
 			const decoded = jwt_decode(token)
 
 			// set the user in App's state to be the decoded token
 			props.setCurrentUser(decoded)
 
-			console.log(cafeArr)
 			if (cafeArr.includes(props.currentUser.id)) { // checks if the cafe has the current user inside of it
 				setSaveButton("Unsave Cafe")
 				console.log(saveButton)
@@ -100,6 +104,32 @@ export default function Result(props) {
 		}
 	}
 
+	const editComment = async e => {
+		try {
+			e.preventDefault()
+			const editComment = await axios.put(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}/comments`,
+				{
+					content: editContent,
+					drink_name: editDrinkName,
+					drink_score: editDrinkScore
+				}
+			)
+			// save the token in localstorage
+			const { token } = editComment.data
+			localStorage.setItem('jwt', token)
+
+			// decode the token
+			const decoded = jwt_decode(token)
+
+			// set the user in App's state to be the decoded token
+			props.setCurrentUser(decoded)
+			props.setCafeInfo(editComment.data.foundCafe)
+			navigate(`/cafes/${yelpId}`)
+		} catch (err) {
+			console.warn(err)
+		}
+	}
+
 	const deleteComment = async () => {
 		try {
 			const deleteComment = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api-v1/cafes/${yelpId}/${props.currentUser.id}/comments`)
@@ -112,7 +142,6 @@ export default function Result(props) {
 
 			// set the user in App's state to be the decoded token
 			props.setCurrentUser(decoded)
-			console.log(deleteComment.data)
 			props.setCafeInfo(deleteComment.data.foundCafe)
 			navigate(`/cafes/${yelpId}`)
 		} catch (err) {
@@ -120,12 +149,10 @@ export default function Result(props) {
 		}
 	}
 
-	// console.log(props.cafeInfo)
 
 	const commentList = props.cafeInfo.comment.map(aComment => {
 		const deleteEdit = (
 			<div>
-      
 				<button onClick={deleteComment} >Delete Comment</button>
 
 				<form onSubmit={editComment}>
@@ -152,19 +179,17 @@ export default function Result(props) {
 					/>
 					<button type='submit'>Edit Comment</button>
 				</form>
-
 			</div>
 		)
 		return (
 			<div>
-				<h2>{aComment.user.name}</h2>
+				{/* <h2>{aComment.populate('user')}</h2> */}
 				<p>{aComment.content}</p>
 				<p>{aComment.drink_name}</p>
 				<p>{aComment.drink_score}</p>
-				{console.log(props.currentUser)}
-				
+				{console.log(aComment)}
 
-				{aComment.user._id == (props.currentUser != null ? props.currentUser.id : 1) ? deleteEdit : null}
+				{/* {aComment.user.includes(props.currentUser.id) ? deleteEdit : null} */}
 			</div>
 		)
 	})
@@ -220,6 +245,7 @@ export default function Result(props) {
 
 			<ul>
 				{commentList}
+				{console.log(props.cafeInfo)}
 			</ul>
 
 			<div>
