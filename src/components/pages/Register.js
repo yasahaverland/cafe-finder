@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import { Navigate } from 'react-router-dom'
+import styles from './Register.module.css'
 
 export default function Register({ currentUser, setCurrentUser }) {
 	// state for the controlled form
@@ -49,39 +50,44 @@ export default function Register({ currentUser, setCurrentUser }) {
 
 	return (
 		<div>
-			<h1>Register for an account:</h1>
+			<h1 className={styles["login-form_title"]}>Register for an account:</h1>
 
 			<p>{msg}</p>
 
-			<form onSubmit={handleSubmit}>
-				<label htmlFor='name'>Name:</label>
-				<input 
-					type="text"
-					id="name"
-					placeholder='your username...'
-					onChange={e => setName(e.target.value)}
-					value={name}
-				/>
+			<form className={styles["login-form"]} onSubmit={handleSubmit}>
+				<div className={styles['login-form__logo-container']}>
+					<h1>The Perfect Blend</h1>
+				</div>
+				<div className={styles['login-form_contetent']}>
+					<input 
+						className={styles['login-form__input']}
+						type="text"
+						id="name"
+						placeholder='Username...'
+						onChange={e => setName(e.target.value)}
+						value={name}
+					/>
 
-				<label htmlFor='email'>Email:</label>
-				<input 
-					type="email"
-					id="email"
-					placeholder='your email...'
-					onChange={e => setEmail(e.target.value)}
-					value={email}
-				/>
+					<input 
+						className={styles['login-form__input']}
+						type="email"
+						id="email"
+						placeholder='Email...'
+						onChange={e => setEmail(e.target.value)}
+						value={email}
+					/>
 
-				<label htmlFor='password'>Password:</label>
-				<input 
-					type="password"
-					id="password"
-					placeholder='password...'
-					onChange={e => setPassword(e.target.value)}
-					value={password}
-				/>
+					<input 
+						className={styles['login-form__input']}
+						type="password"
+						id="password"
+						placeholder='Password...'
+						onChange={e => setPassword(e.target.value)}
+						value={password}
+					/>
 
-				<button type="submit">Register</button>
+					<button className={styles['login-form__button']}  type="submit">Register</button>
+				</div>
 			</form>
 		</div>
 	)

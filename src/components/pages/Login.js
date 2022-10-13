@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import { Navigate } from 'react-router-dom'
+import styles from './Login.module.css'
 
 export default function Login({ currentUser, setCurrentUser }) {
 	// state for the controlled form
@@ -47,30 +48,36 @@ export default function Login({ currentUser, setCurrentUser }) {
 
 	return (
 		<div>
-			<h1>Login to Your Account:</h1>
+			<h1 className={styles["login-form_title"]}>Login to Your Account:</h1>
 
 			<p>{msg}</p>
 
-			<form onSubmit={handleSubmit}>
-				<label htmlFor='email'>Email:</label>
-				<input 
-					type="email"
-					id="email"
-					placeholder='your email...'
-					onChange={e => setEmail(e.target.value)}
-					value={email}
-				/>
+			<form className={styles["login-form"]} onSubmit={handleSubmit}>
+				<div className={styles['login-form__logo-container']}>
+					<h1>The Perfect Blend</h1>
+				</div>
+				<div className={styles['login-form_contetent']}>
+					<input 
+						className={styles['login-form__input']}
+						type="email"
+						placeholder='your email...'
+						onChange={e => setEmail(e.target.value)}
+						value={email}
+					/>
 
-				<label htmlFor='password'>Password:</label>
-				<input 
-					type="password"
-					id="password"
-					placeholder='password...'
-					onChange={e => setPassword(e.target.value)}
-					value={password}
-				/>
+					<input 
+						className={styles['login-form__input']}
+						type="password"
+						placeholder='password...'
+						onChange={e => setPassword(e.target.value)}
+						value={password}
+					/>
+					
+					<button className={styles['login-form__button']} type="submit">Login</button>
+				</div>
+				
 
-				<button type="submit">Login</button>
+				
 			</form>
 		</div>
 	)
