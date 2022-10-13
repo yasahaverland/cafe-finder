@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif, 'Josefin';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,11 +11,14 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  background-image: url(https://i.imgur.com/Cl7Ps3g.jpg)
 }
  .links {
   display: flex;
   justify-content: space-around;
   margin-left: 15px;
+  color: white;
+  font-family: 'Arial Black';
  }
  /* results page */
 .big-div{
@@ -32,7 +35,6 @@ body {
   margin-left: 50px;
   width: 150px;
   height: 150px;
-  background-color: #6F4E37 ;
 }
 .item3 {
   grid-column: 2;
@@ -54,3 +56,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.header {
+  font-family: 'Chalkduster';
+  font-size: 50px;
+}
+
+.search {
+  font-family: 'Estrangelo Edessa';
+  font-size: 20px;
+}
+
+.my-3 {
+  font-family: 'Chalkduster';
+  font-size: 50px;
+
+}
+

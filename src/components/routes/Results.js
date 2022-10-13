@@ -10,12 +10,12 @@ export default function Results(props) {
 			<div key={`result${i}`} className='big-div'>
 				<Link to={`/cafes/${result.id}`}><h2 class-name='item1'>{result.name}</h2></Link> 
 				<div className='item2'>
-					<img src='https://cdn.pixabay.com/photo/2017/02/16/08/38/icon-2070747__340.png' alt='Caffe Shopp icon' width='120px' height='150px'></img>
+					{/* <img src='https://cdn.pixabay.com/photo/2017/02/16/08/38/icon-2070747__340.png' alt='Caffe Shopp icon' width='120px' height='150px'></img> */}
 				</div>
 				<p className='item3'>{result.location.display_address[0]}</p>
 				<p className='item4'>{result.price}</p>
 				
-				<button className='save-btn'>⭐️</button>
+				{/* <button className='save-btn'>⭐️</button> */}
 			</div>
 		)
 	}) 

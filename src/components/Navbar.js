@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+
 export default function Navbar({ currentUser, handleLogout }) {
 	 const loggedIn = (
 		<>
@@ -10,8 +11,6 @@ export default function Navbar({ currentUser, handleLogout }) {
 			<Link className='links' to="/profile">
 				Profile
 			</Link>
-
-			<Link className='links' to="/profile"> Saved Cafes </Link>
 			
 			<Link className='links' to="/">
 				<p onClick={handleLogout}>Logout  </p>
@@ -42,7 +41,7 @@ export default function Navbar({ currentUser, handleLogout }) {
 	return (
 		<nav className='nav-bar'>
 			{/* user always sees this section */}
-			<Link to="/">
+			<Link className='links' to="/">
 				<p>Home</p>
 			</Link>
 

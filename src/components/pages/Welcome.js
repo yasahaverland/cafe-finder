@@ -49,20 +49,26 @@ export default function Welcome(props) {
 
     return (
         <div>
-            <h1>Welcome start searching for a cafe:</h1>
+            <h1 className='header'>The Perfect Blend</h1>
+            <h3 className='search'>Start searching for a bitter coffee...</h3>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <p>
-                        <input
-                            type ='text'
-                            placeholder='enter a location'
-                            value={props.search.location}
-                            onChange={(e) => props.setSearch(e.target.value)}
-                        />
-                    </p>
-                    <p>
-                        <button type="submit" >Search</button> 
-                    </p>
+                    
+                        <div className="field has-addons center" >
+                            <div className='control'>
+                                <input
+                                    className="input"
+                                    type ='text'
+                                    placeholder='enter a location'
+                                    value={props.search.location}
+                                    onChange={(e) => props.setSearch(e.target.value)}
+                                />
+                            <div className='control'>
+                                <button className="button is-info" type="submit" >Search</button> 
+                            </div>
+                            </div>
+                        </div>
+                    
                 </div>
             </form> 
             <Results 

@@ -57,17 +57,45 @@ export default function Profile(props) {
 		fetchData()
 	}, []) // only fire on the first render of this component
 	return (
-		<div>
-			<h1>Hello, {props.currentUser.name}</h1>
+		// <div>
+		// 	<h1>Just brew it {props.currentUser.name}</h1>
 
-			<p>your email is {props.currentUser.email}</p>
+		// 	{/* <p>your email is {props.currentUser.email}</p> */}
 
-			<h2>Here are your saved cafes:</h2>
-			{/* <p>{props.currentUser.cafe}</p> */}
+		// 	<h2>Here are your saved cafes:</h2>
 
-			<h3>{displaySaves}</h3>
+		// 	<h3>{displaySaves}</h3>
 
-			<h3>{msg}</h3>
+		// </div>
+
+
+		// <div class="card mb-4">
+		<div class="card-body text-center">
+			{/* <img src="https://i.imgur.com/P3NYRmG.png" alt="avatar"
+			class="rounded-circle img-fluid" style="width: 150px;" > */}
+			<h5 class="my-3">Just brew it {props.currentUser.name}</h5>
+			<p class="text-muted mb-4">Your Saved Cafes Below:</p>
+			<div class="d-flex justify-content-center mb-2">
+			<p class="text-muted mb-0">{displaySaves}</p>
+			</div>
 		</div>
+		// </div>
+
+
+
+
+
 	)
 }
+
+
+
+
+
+
+
+
+
+
+
+
