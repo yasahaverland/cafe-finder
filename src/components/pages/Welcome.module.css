@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Pacifico&display=swap');
 
+.title {
+    margin-top: 50px;
+    font-family: 'Pacifico', cursive;
+    font-size: 70px;
+    color: #f4ead8;
+}
+.sub-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 40px;
+    color: #f4ead8;
+    margin-bottom: 40px;
+}
+
 .search-bar {
     box-sizing: border-box;
     clear: both;

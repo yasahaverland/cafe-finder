@@ -251,7 +251,7 @@ export default function Result(props) {
 		<div className='big-div'>
 			<h2 className='item1'>{props.cafeInfo.name}</h2>
 			<div className='item2'>
-				<img src='https://cdn.pixabay.com/photo/2017/02/16/08/38/icon-2070747__340.png' alt='Caffe Shopp icon' width='120px' height='150px'></img>
+				<img src='https://uxwing.com/wp-content/themes/uxwing/download/food-and-drinks/coffee-bean-icon.png' alt='Coffee beans'></img>
 			</div>
 
 			<p className='item3'>{props.cafeInfo.location}</p>
