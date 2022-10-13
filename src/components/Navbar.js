@@ -11,8 +11,6 @@ export default function Navbar({ currentUser, handleLogout }) {
 			<Link className={styles['links']} to="/profile">
 				Profile
 			</Link>
-
-			<Link className={styles['links']} to="/profile"> Saved Cafes </Link>
 			
 			<Link className={styles['links']} to="/">
 				<p onClick={handleLogout}>Logout  </p>
